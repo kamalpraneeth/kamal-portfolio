@@ -71,6 +71,24 @@
     transition: background .2s ease, border-color .2s ease, color .2s ease !important;
   }
 
+  /* =========================================================
+     ENGINEERING NOTES
+  ========================================================= */
+  .notes-card {
+    background: var(--surf); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2.5rem; margin-top: 2rem;
+  }
+  .notes-header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+  .notes-title { font-size: clamp(1.4rem, 3vw, 1.8rem); color: var(--text); font-family: var(--font-h); line-height:1.2; }
+  .notes-badge { background: var(--surf2); border: 1px solid var(--border); font-size: .75rem; padding: .2rem .6rem; border-radius: 4px; font-family: var(--font-m); color: var(--muted); }
+  .notes-content p { margin-bottom: 1.5rem; color: var(--muted); font-size: 1rem; line-height: 1.7; }
+  .notes-content p:last-child { margin-bottom: 0; }
+  .notes-content strong { color: var(--text); font-weight: 600; }
+  .notes-content blockquote { border-left: 3px solid var(--cyan); padding-left: 1.2rem; margin: 1.5rem 0; font-style: italic; color: var(--text); }
+  
+  html[data-theme="enterprise"] .notes-card { background: var(--surf); border-color: var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+  html[data-theme="enterprise"] .notes-badge { background: var(--surf2); }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-size: 16px; }
   body {
@@ -770,6 +788,7 @@
         <div class="avail-badge"><div class="avail-dot"></div>Available for Hire</div>
         <ul class="nav-links">
           <li><a href="#projects">Projects</a></li>
+          <li><a href="#notes">Notes</a></li>
           <li><a href="#certs">Certs</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#experience">Experience</a></li>
@@ -902,9 +921,31 @@
       </div>
     </section>
 
+    <!-- ENGINEERING NOTES -->
+    <section id="notes" class="section container">
+      <span class="eyebrow">02 &middot; Engineering Notes</span>
+      <h2>Technical Writing</h2>
+      <div class="notes-card reveal glass">
+        <div class="notes-header">
+          <h3 class="notes-title">Bridging the Gap: From Jupyter to Production APIs</h3>
+          <span class="notes-badge">Read time: 2 min</span>
+        </div>
+        <div class="notes-content">
+          <p>Most machine learning coursework ends inside a Jupyter Notebook. We load the CSV, train the <code>RandomForestRegressor</code>, print the R&sup2; score, and call it a day. But in the real world, <strong>a model with a 99% accuracy is entirely useless if the engineering team can't integrate it into a product.</strong></p>
+          <p>That is why my primary focus as an AI/ML Engineer isn't just training models—it's productionizing them. The gap between a <code>model.predict()</code> call in a notebook and a robust, scalable microservice is massive, and it requires a fundamentally different engineering mindset.</p>
+          <p>When I built the California House Price Predictor, I wrapped the inference engine in <strong>FastAPI</strong>. Why? Because it natively supports async routing and auto-generates OpenAPI specs, making it instantly consumable by frontend and backend teams.</p>
+          <p>More importantly, I enforce strict data integrity using <strong>Pydantic</strong> models. ML models fail silently when fed bad data. By defining rigid input schemas, the API catches type mismatches and missing fields at the gateway, returning a 422 HTTP error rather than passing garbage into the model and poisoning the prediction.</p>
+          <p>Finally, I wrap every microservice in <strong>Docker</strong>. "It works on my machine" is not an acceptable engineering standard. Containerization ensures that the exact Python environment, dependencies, and OS libraries used during training are replicated flawlessly in production.</p>
+          <blockquote>
+            Building the model is only 20% of the work. Building the infrastructure to serve, validate, and scale that model reliably is what makes you an engineer.
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
     <!-- CERTS -->
     <section id="certs" class="section container">
-      <span class="eyebrow">02 &middot; Credentials</span>
+      <span class="eyebrow">03 &middot; Credentials</span>
       <h2>Certifications</h2>
       <div class="cert-sub">Certifications</div>
       <div class="cert-grid">
@@ -936,7 +977,7 @@
 
     <!-- SKILLS -->
     <section id="skills" class="section container">
-      <span class="eyebrow">03 &middot; Skills</span>
+      <span class="eyebrow">04 &middot; Skills</span>
       <h2>Technical Arsenal</h2>
       <div class="skills-grid">
         <div class="reveal">
@@ -968,7 +1009,7 @@
 
     <!-- EXPERIENCE -->
     <section id="experience" class="section container">
-      <span class="eyebrow">04 &middot; Experience</span>
+      <span class="eyebrow">05 &middot; Experience</span>
       <h2>Internships</h2>
       <div class="timeline">
         <div class="tl-item reveal">
@@ -996,7 +1037,7 @@
 
     <!-- EDUCATION -->
     <section id="education" class="section container">
-      <span class="eyebrow">05 &middot; Education</span>
+      <span class="eyebrow">06 &middot; Education</span>
       <h2>Academic Background</h2>
       <div class="timeline">
         <div class="tl-item reveal">
@@ -1022,7 +1063,7 @@
 
     <!-- CONTACT -->
     <section id="contact" class="section container">
-      <span class="eyebrow">06 &middot; Contact</span>
+      <span class="eyebrow">07 &middot; Contact</span>
       <h2>Get In Touch</h2>
       <div class="contact-block glass reveal">
         <div class="contact-row"><span class="c-key">Name:</span><span>Batchu Kamal Praneeth</span></div>
@@ -1490,6 +1531,7 @@
   function initCommandPalette() {
     const CMDS = [
       { label:'Projects',       desc:'Verified implementations',        href:'#projects' },
+      { label:'Engineering Notes', desc:'Technical writing & architecture', href:'#notes' },
       { label:'Certifications', desc:'NPTEL, ServiceNow, internships',   href:'#certs'    },
       { label:'Skills',         desc:'Languages, AI/ML, backend, tools', href:'#skills'   },
       { label:'Experience',     desc:'Internship history',               href:'#experience' },
