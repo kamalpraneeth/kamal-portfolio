@@ -621,7 +621,7 @@
   /* =========================================================
      FULL-SCREEN DEMO MODAL
   ========================================================= */
-  #demo-modal {
+  .demo-modal {
     position: fixed; inset: 0; z-index: 4000;
     display: flex; flex-direction: column;
     background: rgba(6,6,12,.97);
@@ -629,7 +629,7 @@
     opacity: 0; pointer-events: none;
     transition: opacity .35s ease;
   }
-  #demo-modal.open { opacity: 1; pointer-events: auto; }
+  .demo-modal.open { opacity: 1; pointer-events: auto; }
 
   .demo-modal-bar {
     display: flex; align-items: center; justify-content: space-between;
@@ -1106,7 +1106,7 @@
   </div>
 
   <!-- Full-Screen Demo Modal -->
-  <div id="demo-modal" role="dialog" aria-modal="true" aria-label="Live Project Demo">
+  <div id="demo-modal" class="demo-modal" role="dialog" aria-modal="true" aria-label="Live Project Demo">
     <div class="demo-modal-bar">
       <div class="demo-modal-title" id="demo-modal-title">Live Demo</div>
       <div class="demo-modal-actions">
