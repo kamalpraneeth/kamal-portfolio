@@ -879,7 +879,7 @@
             <div class="proj-actions">
               <a href="https://github.com/kamalpraneeth/ai-support-platform" target="_blank" rel="noopener" class="p-link" aria-label="Source code for AI Support Platform">Source Repo &#8599;</a>
               <button class="p-btn" data-url="https://ai-support-platform-2xnp.onrender.com" data-title="AI Support Platform">Live Demo &#8594;</button>
-              <button class="p-btn arch-btn" data-arch="ai" style="background:var(--surf2);color:var(--text);border:1px solid var(--border);">Architecture</button>
+              <button class="p-btn arch-btn" data-arch="ai" style="background:var(--surf2);color:var(--text);border:1px solid var(--border);">Code Snippet</button>
             </div>
           </div>
 
@@ -896,7 +896,7 @@
             <div class="proj-actions">
               <a href="https://github.com/kamalpraneeth/sales-analytics-pipeline" target="_blank" rel="noopener" class="p-link" aria-label="Source code for Sales Analytics Pipeline">Source Repo &#8599;</a>
               <button class="p-btn" data-url="https://sales-analytics-pipeline.onrender.com" data-title="Sales Analytics Pipeline">Live Demo &#8594;</button>
-              <button class="p-btn arch-btn" data-arch="sales" style="background:var(--surf2);color:var(--text);border:1px solid var(--border);">Architecture</button>
+              <button class="p-btn arch-btn" data-arch="sales" style="background:var(--surf2);color:var(--text);border:1px solid var(--border);">Code Snippet</button>
             </div>
           </div>
 
@@ -913,7 +913,7 @@
             <div class="proj-actions">
               <a href="https://github.com/kamalpraneeth/california-house-price-predictor" target="_blank" rel="noopener" class="p-link" aria-label="Source code for California House Price Predictor">Source Repo &#8599;</a>
               <button class="p-btn" data-url="https://california-house-price-predictor-rzg9.onrender.com" data-title="CA House Price Predictor">Live Demo &#8594;</button>
-              <button class="p-btn arch-btn" data-arch="house" style="background:var(--surf2);color:var(--text);border:1px solid var(--border);">Architecture</button>
+              <button class="p-btn arch-btn" data-arch="house" style="background:var(--surf2);color:var(--text);border:1px solid var(--border);">Code Snippet</button>
             </div>
           </div>
 
@@ -1093,9 +1093,9 @@
   </div>
 
   <!-- Architecture Code Modal -->
-  <div id="arch-modal" class="demo-modal" role="dialog" aria-modal="true" aria-label="Architecture Code Preview">
+  <div id="arch-modal" class="demo-modal" role="dialog" aria-modal="true" aria-label="Code Preview">
     <div class="demo-modal-bar">
-      <div class="demo-modal-title" id="arch-modal-title">Architecture Preview</div>
+      <div class="demo-modal-title" id="arch-modal-title">Code Preview</div>
       <div class="demo-modal-actions">
         <button class="demo-modal-close" id="arch-modal-close" aria-label="Close Code Preview">&times;</button>
       </div>
@@ -1245,7 +1245,7 @@
     document.querySelectorAll('.arch-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const type = btn.dataset.arch;
-        title.textContent = type === 'ai' ? 'FastAPI + LLaMA Architecture' : type === 'sales' ? 'Pandas ETL Architecture' : 'FastAPI Predict Endpoint';
+        title.textContent = type === 'ai' ? 'FastAPI + LLaMA Code' : type === 'sales' ? 'Pandas ETL Code' : 'FastAPI Predict Endpoint';
         content.textContent = SNIPPETS[type] || 'Code snippet not found.';
         modal.classList.add('open');
         document.body.style.overflow = 'hidden';
