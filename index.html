@@ -661,7 +661,7 @@
     <div class="b-line"><span class="b-info">[ INFO ]</span> Connecting to GitHub API...</div>
     <div class="b-line"><span class="b-ok">[  OK  ]</span> 3 live deployments — uptime 99.9%</div>
     <div class="b-line"><span class="b-ok">[  OK  ]</span> KAI assistant online</div>
-    <div class="b-line"><span class="b-warn">[ WARN ]</span> Competitive threat to other candidates detected</div>
+    <div class="b-line"><span class="b-ok">[  OK  ]</span> Core competencies verified &mdash; Ready for interview</div>
   </div>
 
   <div id="boot-bar-wrap">
@@ -749,15 +749,15 @@
           <p class="hero-subtitle" id="hero-sub">B.Tech CSE (AI &amp; ML) &middot; Completed April 2026 &middot; Eluru, India</p>
           <div class="stat-row glass" id="stat-row" style="padding:1rem;">
             <div class="stat-card">
-              <span class="stat-num"><span class="ticker" data-target="3">0</span></span>
+              <span class="stat-num"><span class="ticker" data-target="3">3</span></span>
               <span class="stat-label">Projects</span>
             </div>
             <div class="stat-card">
-              <span class="stat-num"><span class="ticker" data-target="3">0</span></span>
+              <span class="stat-num"><span class="ticker" data-target="3">3</span></span>
               <span class="stat-label">Live Deploys</span>
             </div>
             <div class="stat-card">
-              <span class="stat-num"><span class="ticker" data-target="42" data-suffix="+">0</span></span>
+              <span class="stat-num"><span class="ticker" data-target="42" data-suffix="+">42+</span></span>
               <span class="stat-label">Tests Passing</span>
             </div>
             <div class="stat-card">
@@ -1512,49 +1512,35 @@
   ============================================================== */
   function initGitHub() {
     const GH = 'kamalpraneeth';
+    
+    function setStaticStats() {
+      document.getElementById('gh-repos').textContent     = "4";
+      document.getElementById('gh-followers').textContent = "0";
+      document.getElementById('gh-stars').textContent     = "0";
+      document.getElementById('gh-live').classList.remove('loading');
+      document.getElementById('gh-live').style.opacity = '.85'; // slight dim to indicate static fallback
+    }
+
     (async () => {
       try {
-        const [uRes, rRes, eRes] = await Promise.all([
+        const [uRes, rRes] = await Promise.all([
           fetch(`https://api.github.com/users/${GH}`),
-          fetch(`https://api.github.com/users/${GH}/repos?per_page=100`),
-          fetch(`https://api.github.com/users/${GH}/events/public?per_page=10`),
+          fetch(`https://api.github.com/users/${GH}/repos?per_page=100`)
         ]);
         if (uRes.ok && rRes.ok) {
           const u = await uRes.json(), r = await rRes.json();
           const stars = r.reduce((s, x) => s + x.stargazers_count, 0);
-          document.getElementById('gh-repos').textContent     = u.public_repos;
-          document.getElementById('gh-followers').textContent = u.followers;
-          document.getElementById('gh-stars').textContent     = stars;
+          document.getElementById('gh-repos').textContent     = u.public_repos || "4";
+          document.getElementById('gh-followers').textContent = u.followers || "0";
+          document.getElementById('gh-stars').textContent     = stars || "0";
           document.getElementById('gh-live').classList.remove('loading');
-        }
-        if (eRes.ok) {
-          const events = await eRes.json();
-          const feed   = document.getElementById('gh-feed');
-          const pushes = events.filter(e => e.type === 'PushEvent').slice(0, 4);
-          pushes.forEach((ev, i) => {
-            const msg  = ev.payload?.commits?.[0]?.message || 'Pushed to repo';
-            const repo = ev.repo?.name?.replace(`${GH}/`, '') || '';
-            const when = timeAgo(new Date(ev.created_at));
-            const el   = document.createElement('div');
-            el.className = 'gh-ev-item';
-            el.style.animationDelay = (i * .1) + 's';
-            el.innerHTML = `<div class="gh-ev-dot"></div><div class="gh-ev-msg"><b>${repo}</b> — ${msg.split('\n')[0].slice(0,60)}</div><div class="gh-ev-time">${when}</div>`;
-            feed.appendChild(el);
-          });
-          if (!pushes.length) feed.innerHTML = '<div style="font-size:.72rem;color:var(--muted);font-family:var(--font-m);">No recent push events found</div>';
+        } else {
+          setStaticStats();
         }
       } catch (e) {
-        document.getElementById('gh-live').style.opacity = '.35';
+        setStaticStats();
       }
     })();
-
-    function timeAgo(date) {
-      const s = Math.floor((Date.now() - date) / 1000);
-      if (s < 60)   return s + 's ago';
-      if (s < 3600) return Math.floor(s/60) + 'm ago';
-      if (s < 86400) return Math.floor(s/3600) + 'h ago';
-      return Math.floor(s/86400) + 'd ago';
-    }
   }
 
   /* ==============================================================
