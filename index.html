@@ -762,8 +762,8 @@
     <div class="chat-hd">
       <div class="chat-avatar">K</div>
       <div>
-        <div class="chat-title">KAI — Kamal AI</div>
-        <div class="chat-sub"><div class="chat-online"></div> Online · Ask me anything</div>
+        <div class="chat-title">KAI — Portfolio Assistant</div>
+        <div class="chat-sub"><div class="chat-online"></div> Online · Rule-based helper</div>
       </div>
       <button class="chat-x" id="chat-close" aria-label="Close">&times;</button>
     </div>
@@ -912,7 +912,7 @@
             </div>
             <div class="proj-actions">
               <a href="https://github.com/kamalpraneeth/california-house-price-predictor" target="_blank" rel="noopener" class="p-link" aria-label="Source code for California House Price Predictor">Source Repo &#8599;</a>
-              <button class="p-btn" data-url="https://california-house-price-predictor-rzg9.onrender.com" data-title="CA House Price Predictor">Live Demo &#8594;</button>
+              <button class="p-btn" data-url="https://california-house-price-predictor-lbeu.onrender.com" data-title="CA House Price Predictor">Live Demo &#8594;</button>
               <button class="p-btn arch-btn" data-arch="house" style="background:var(--surf2);color:var(--text);border:1px solid var(--border);">Code Snippet</button>
             </div>
           </div>
@@ -924,20 +924,19 @@
     <!-- ENGINEERING NOTES -->
     <section id="notes" class="section container">
       <span class="eyebrow">02 &middot; Engineering Notes</span>
-      <h2>Technical Writing</h2>
+      <h2>Technical Writing &amp; Architecture Notes</h2>
       <div class="notes-card reveal glass">
         <div class="notes-header">
-          <h3 class="notes-title">Bridging the Gap: From Jupyter to Production APIs</h3>
+          <h3 class="notes-title">System Takeaways: Deploying Production ML &amp; Analytics Microservices</h3>
           <span class="notes-badge">Read time: 2 min</span>
         </div>
         <div class="notes-content">
-          <p>Most machine learning coursework ends inside a Jupyter Notebook. We load the CSV, train the <code>RandomForestRegressor</code>, print the R&sup2; score, and call it a day. But in the real world, <strong>a model with a 99% accuracy is entirely useless if the engineering team can't integrate it into a product.</strong></p>
-          <p>That is why my primary focus as an AI/ML Engineer isn't just training models—it's productionizing them. The gap between a <code>model.predict()</code> call in a notebook and a robust, scalable microservice is massive, and it requires a fundamentally different engineering mindset.</p>
-          <p>When I built the California House Price Predictor, I wrapped the inference engine in <strong>FastAPI</strong>. Why? Because it natively supports async routing and auto-generates OpenAPI specs, making it instantly consumable by frontend and backend teams.</p>
-          <p>More importantly, I enforce strict data integrity using <strong>Pydantic</strong> models. ML models fail silently when fed bad data. By defining rigid input schemas, the API catches type mismatches and missing fields at the gateway, returning a 422 HTTP error rather than passing garbage into the model and poisoning the prediction.</p>
-          <p>Finally, I wrap every microservice in <strong>Docker</strong>. "It works on my machine" is not an acceptable engineering standard. Containerization ensures that the exact Python environment, dependencies, and OS libraries used during training are replicated flawlessly in production.</p>
+          <p>Building real AI/ML services exposed core engineering challenges that Jupyter notebooks don't prepare you for—handling unexpected payload shapes, managing LLM API latency, and guaranteeing zero environment drift across cloud deployments.</p>
+          <p><strong>1. Strict API Input Validation:</strong> Scikit-learn inference pipelines (like the Random Forest regressor used in California House Price Predictor) fail silently or produce nonsense outputs when passed invalid feature ranges or missing keys. By enforcing <strong>Pydantic</strong> schema validation at the FastAPI gateway, bad inputs are rejected with clear 422 HTTP errors before reaching model memory.</p>
+          <p><strong>2. Hybrid NLP + LLM Architecture:</strong> Calling LLMs for every incoming ticket is slow and costly. For the AI Support Platform, combining fast local classifiers (TF-IDF + Logistic Regression and VADER sentiment) for routing with Groq's LLaMA 3.1 for reply generation cut overall latency while maintaining contextual response quality.</p>
+          <p><strong>3. Containerized Reproducibility:</strong> Packaging each microservice with <strong>Docker</strong> and automating unit tests via GitHub Actions CI ensured that model artifacts, dependency lockfiles, and environment variables stay identical between local dev environments and Render cloud instances.</p>
           <blockquote>
-            Building the model is only 20% of the work. Building the infrastructure to serve, validate, and scale that model reliably is what makes you an engineer.
+            Focusing on model accuracy is only half the job—building resilient validation schemas, clean APIs, and automated test pipelines is what makes an ML solution production-ready.
           </blockquote>
         </div>
       </div>
@@ -1598,7 +1597,7 @@
     const chips   = document.getElementById('chat-chips');
 
     const KB = [
-      { keys:['who','about','introduce','yourself','tell me','name'], a:`Hi! I'm **KAI**, Kamal's portfolio AI.\n\nBatchu Kamal Praneeth is an AI/ML Engineer from Eluru, India — B.Tech completed in April 2026. He builds production-grade AI/ML systems with real deployments, verified test suites, and zero fabricated claims.\n\nWhat would you like to know?` },
+      { keys:['who','about','introduce','yourself','tell me','name'], a:`Hi! I'm **KAI**, Kamal's portfolio assistant.\n\nBatchu Kamal Praneeth is an AI/ML Engineer from Eluru, India — B.Tech completed in April 2026. He builds production-grade AI/ML systems with real deployments, verified test suites, and zero fabricated claims.\n\nWhat would you like to know?` },
       { keys:['skill','tech','stack','language','know','program','tool'], a:`Technical stack:\n\n🐍 Languages: Python, Java, C++, JavaScript\n🤖 AI/ML: scikit-learn, Pandas, NumPy, NLP, LLMs/RAG\n⚙️ Backend: FastAPI, Flask, Node.js, REST APIs\n🗄️ Data: SQL, MySQL, SQLite, Power BI\n🐳 Infra: Docker, GitHub Actions CI/CD, Linux` },
       { keys:['project','build','deploy','make','create','app','platform','pipeline'], a:`3 production-deployed projects:\n\n1️⃣ **AI Support Platform** — FastAPI + Groq LLM + scikit-learn. 34/34 tests. Real-time AI replies.\n\n2️⃣ **Sales Analytics Pipeline** — $10M data analyzed. Power BI dashboards. 12.37% margin insight.\n\n3️⃣ **House Price Predictor** — Random Forest. RMSE 0.5449, R² 0.7734. Fully reproducible.` },
       { keys:['education','degree','college','university','study','gpa','cgpa','btech'], a:`🎓 B.Tech CSE (AI & ML)\nJNTUK — Ramachandra College of Engineering\nCGPA: 8.1/10 · Completed April 2026\n\n📚 Intermediate (MPC): 88.3% — Narayana Jr. College\n📚 SSC: 597/600 — Narayana School` },
@@ -1659,7 +1658,7 @@
     toggle.addEventListener('click', () => {
       const isOpen = win.classList.toggle('open');
       if (isOpen && msgs.children.length === 0) {
-        setTimeout(() => addMsg("👋 Hi! I'm KAI — Kamal's portfolio AI assistant.\n\nAsk me anything about his skills, projects, experience, or how to reach him!", 'bot'), 400);
+        setTimeout(() => addMsg("👋 Hi! I'm KAI — Kamal's portfolio assistant.\n\nAsk me anything about his skills, projects, experience, or how to reach him!", 'bot'), 400);
       }
     });
     closeBtn.addEventListener('click', () => win.classList.remove('open'));
@@ -1672,7 +1671,7 @@
     const GH = 'kamalpraneeth';
     
     function setStaticStats() {
-      document.getElementById('gh-repos').textContent     = "4";
+      document.getElementById('gh-repos').textContent     = "5";
       document.getElementById('gh-followers').textContent = "0";
       document.getElementById('gh-stars').textContent     = "0";
       document.getElementById('gh-live').classList.remove('loading');
@@ -1688,7 +1687,7 @@
         if (uRes.ok && rRes.ok) {
           const u = await uRes.json(), r = await rRes.json();
           const stars = r.reduce((s, x) => s + x.stargazers_count, 0);
-          document.getElementById('gh-repos').textContent     = u.public_repos || "4";
+          document.getElementById('gh-repos').textContent     = u.public_repos || "5";
           document.getElementById('gh-followers').textContent = u.followers || "0";
           document.getElementById('gh-stars').textContent     = stars || "0";
           document.getElementById('gh-live').classList.remove('loading');
