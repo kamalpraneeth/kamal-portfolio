@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Batchu Kamal Praneeth | AI/ML Engineer</title>
   <meta name="description"
-    content="Portfolio of Batchu Kamal Praneeth — B.Tech CSE (AI/ML), Class of 2026. 3 deployed projects, 42+ tests passing.">
+    content="Portfolio of Batchu Kamal Praneeth — B.Tech CSE (AI/ML), Class of 2026. 4 deployed projects, 42+ tests passing.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload"
@@ -2160,7 +2160,7 @@
       <div class="b-line"><span class="b-ok">[ OK ]</span> Checking claims against source truth...</div>
       <div class="b-line"><span class="b-ok">[ OK ]</span> Fabrications detected: <b>0</b></div>
       <div class="b-line"><span class="b-info">[ INFO ]</span> Connecting to GitHub API...</div>
-      <div class="b-line"><span class="b-ok">[ OK ]</span> 3 live deployments — uptime 99.9%</div>
+      <div class="b-line"><span class="b-ok">[ OK ]</span> 4 live deployments — uptime 99.9%</div>
       <div class="b-line"><span class="b-ok">[ OK ]</span> KAI assistant online</div>
       <div class="b-line"><span class="b-ok">[ OK ]</span> Core competencies verified &mdash; Ready for interview</div>
     </div>
@@ -2274,11 +2274,11 @@
               Eluru, India</p>
             <div class="stat-row glass" id="stat-row" style="padding:1rem;">
               <div class="stat-card">
-                <span class="stat-num"><span class="ticker" data-target="3">3</span></span>
+                <span class="stat-num"><span class="ticker" data-target="4">4</span></span>
                 <span class="stat-label">Projects</span>
               </div>
               <div class="stat-card">
-                <span class="stat-num"><span class="ticker" data-target="3">3</span></span>
+                <span class="stat-num"><span class="ticker" data-target="4">4</span></span>
                 <span class="stat-label">Live Deploys</span>
               </div>
               <div class="stat-card">
@@ -2297,11 +2297,12 @@
               <span class="hv-label">status: all systems verified</span>
             </div>
             <div class="hv-line"></div>
-            <div class="hv-metric"><span>AI Support Platform</span><span class="g1">34/34 tests</span></div>
-            <div class="hv-metric"><span>Sales Analytics Pipeline</span><span class="g2">$10M analyzed</span></div>
-            <div class="hv-metric"><span>House Price Predictor</span><span class="g3">R&sup2; 0.7734</span></div>
+            <div class="hv-metric"><span>Enterprise AI ServiceNow</span><span class="g1">Live Sync PDI</span></div>
+            <div class="hv-metric"><span>AI Support Platform</span><span class="g2">34/34 tests</span></div>
+            <div class="hv-metric"><span>Sales Analytics Pipeline</span><span class="g3">$10M analyzed</span></div>
+            <div class="hv-metric"><span>House Price Predictor</span><span class="g1">R&sup2; 0.7734</span></div>
             <div class="hv-line"></div>
-            <div class="hv-metric"><span>Uptime (all 3 live)</span><span class="g1">99.9%</span></div>
+            <div class="hv-metric"><span>Uptime (all 4 live)</span><span class="g1">99.9%</span></div>
             <!-- Live GitHub stats -->
             <div class="gh-live loading" id="gh-live">
               <div class="gh-stat"><span class="gh-val" id="gh-repos">&mdash;</span><span class="gh-lbl">Repos</span>
@@ -2332,7 +2333,29 @@
         <div class="proj-scroll-outer" style="margin-top:2rem;">
           <div class="proj-scroll-track" id="proj-track">
 
-            <div class="proj-card glass reveal" style="--glow-color:#7C3AED;">
+            <div class="proj-card glass reveal" style="--glow-color:#10B981;">
+              <div class="proj-top">
+                <h3 class="proj-name">Enterprise AI ServiceNow Platform</h3>
+                <span class="proj-badge">VERIFIED</span>
+              </div>
+              <p class="proj-row"><b>Stack:</b> JavaScript &middot; HTML5/CSS3 &middot; ServiceNow PDI REST API &middot; AI Pipeline Engine &middot; Vercel</p>
+              <p class="proj-row"><b>Status:</b> Live Sync to ServiceNow PDI &middot; Human-in-the-Loop Governance Console &middot; Audit Trail</p>
+              <div class="proj-tags">
+                <span class="p-tag">Enterprise AI</span><span class="p-tag">ServiceNow</span><span
+                  class="p-tag">AIOps</span><span class="p-tag">Full Stack</span>
+              </div>
+              <div class="proj-actions">
+                <a href="https://github.com/kamalpraneeth/enterprise-ai-servicenow-platform" target="_blank" rel="noopener"
+                  class="p-link" aria-label="Source code for Enterprise AI ServiceNow Platform">Source Repo &#8599;</a>
+                <button class="p-btn" data-url="https://enterprise-ai-servicenow-platform.vercel.app"
+                  data-title="Enterprise AI ServiceNow Platform">Live Demo &#8594;</button>
+                <button class="p-btn arch-btn" data-arch="servicenow"
+                  style="background:var(--surf2);color:var(--text);border:1px solid var(--border);">Code
+                  Snippet</button>
+              </div>
+            </div>
+
+            <div class="proj-card glass reveal d1" style="--glow-color:#7C3AED;">
               <div class="proj-top">
                 <h3 class="proj-name">AI Support Platform</h3>
                 <span class="proj-badge">VERIFIED</span>
@@ -2432,7 +2455,8 @@
             <p><strong>3. Containerized Reproducibility:</strong> Packaging each microservice with
               <strong>Docker</strong> and automating unit tests via GitHub Actions CI ensured that model artifacts,
               dependency lockfiles, and environment variables stay identical between local dev environments and Render
-              cloud instances.</p>
+              cloud instances.
+            </p>
             <blockquote>
               Focusing on model accuracy is only half the job—building resilient validation schemas, clean APIs, and
               automated test pipelines is what makes an ML solution production-ready.
@@ -2779,6 +2803,23 @@
         const title = document.getElementById('arch-modal-title');
 
         const SNIPPETS = {
+          'servicenow': `// ServiceNow PDI REST API Integration & Confidence Routing Engine
+async function routeTicketToServiceNow(ticketData) {
+    const confidence = ticketData.confidenceScore;
+    
+    if (confidence >= 0.90) {
+        // Automated ServiceNow Incident Creation
+        const response = await fetch('https://dev390619.service-now.com/api/now/table/incident', {
+            method: 'POST',
+            headers: { 'Authorization': 'Basic ...', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ short_description: ticketData.summary, urgency: ticketData.urgency })
+        });
+        return { status: 'AUTO_CREATED', incNumber: response.result.number };
+    } else if (confidence >= 0.70) {
+        // Queue into Manager Review Console for Human Governance
+        return { status: 'PENDING_REVIEW', queueId: ticketData.id };
+    }
+}`,
           'ai': `@app.post("/api/tickets")\nasync def classify_ticket(ticket: Ticket):\n    # 1. Classical ML Inference\n    pred = model.predict([ticket.text])[0]\n    \n    # 2. VADER Sentiment Analysis\n    sentiment = analyzer.polarity_scores(ticket.text)\n    \n    # 3. LLM Response Generation (Groq / LLaMA-3.1)\n    reply = generate_ai_reply(ticket.text, pred)\n    \n    return {\n        "category": pred,\n        "sentiment_score": sentiment['compound'],\n        "generated_reply": reply\n    }`,
           'sales': `def process_sales_data(file_path):\n    df = pd.read_csv(file_path)\n    \n    # Feature Engineering\n    df['Total_Revenue'] = df['Quantity'] * df['Unit_Price']\n    df['Margin'] = (df['Total_Revenue'] - df['Total_Cost']) / df['Total_Revenue']\n    \n    # Clean anomalies\n    df = df[df['Margin'] > 0]\n    df.fillna({'Region': 'Unknown'}, inplace=True)\n    \n    # Load to DB\n    engine = create_engine('sqlite:///sales.db')\n    df.to_sql('sales_clean', engine, if_exists='replace')\n    return df`,
           'house': `@app.post("/predict", response_model=PredictionResponse)\nasync def predict_price(features: HouseFeatures):\n    # Strict Pydantic validation guarantees data integrity\n    data = [[ \n        features.MedInc, features.HouseAge, \n        features.AveRooms, features.AveBedrms,\n        features.Population, features.AveOccup,\n        features.Latitude, features.Longitude\n    ]]\n    \n    # Model achieves R² 0.7734 on unseen test data\n    prediction = model.predict(data)[0]\n    \n    return {"predicted_price_100k": round(prediction, 4)}`
@@ -2787,7 +2828,7 @@
         document.querySelectorAll('.arch-btn').forEach(btn => {
           btn.addEventListener('click', () => {
             const type = btn.dataset.arch;
-            title.textContent = type === 'ai' ? 'FastAPI + LLaMA Code' : type === 'sales' ? 'Pandas ETL Code' : 'FastAPI Predict Endpoint';
+            title.textContent = type === 'servicenow' ? 'ServiceNow REST Sync & Governance' : type === 'ai' ? 'FastAPI + LLaMA Code' : type === 'sales' ? 'Pandas ETL Code' : 'FastAPI Predict Endpoint';
             content.textContent = SNIPPETS[type] || 'Code snippet not found.';
             modal.classList.add('open');
             document.body.style.overflow = 'hidden';
@@ -3072,6 +3113,7 @@
       ============================================================== */
       function initCommandPalette() {
         const CMDS = [
+          { label: 'Enterprise AI ServiceNow Platform', desc: 'AIOps gateway, ServiceNow PDI sync & review console', href: 'https://enterprise-ai-servicenow-platform.vercel.app', ext: true },
           { label: 'Projects', desc: 'Verified implementations', href: '#projects' },
           { label: 'Engineering Notes', desc: 'Technical writing & architecture', href: '#notes' },
           { label: 'Certifications', desc: 'NPTEL, ServiceNow, internships', href: '#certs' },
@@ -3142,14 +3184,14 @@
         const KB = [
           { keys: ['who', 'about', 'introduce', 'yourself', 'tell me', 'name'], a: `Hi! I'm **KAI**, Kamal's portfolio assistant.\n\nBatchu Kamal Praneeth is an AI/ML Engineer from Eluru, India — B.Tech completed in April 2026. He builds production-grade AI/ML systems with real deployments, verified test suites, and zero fabricated claims.\n\nWhat would you like to know?` },
           { keys: ['skill', 'tech', 'stack', 'language', 'know', 'program', 'tool'], a: `Technical stack:\n\n🐍 Languages: Python, Java, C++, JavaScript\n🤖 AI/ML: scikit-learn, Pandas, NumPy, NLP, LLMs/RAG\n⚙️ Backend: FastAPI, Flask, Node.js, REST APIs\n🗄️ Data: SQL, MySQL, SQLite, Power BI\n🐳 Infra: Docker, GitHub Actions CI/CD, Linux` },
-          { keys: ['project', 'build', 'deploy', 'make', 'create', 'app', 'platform', 'pipeline'], a: `3 production-deployed projects:\n\n1️⃣ **AI Support Platform** — FastAPI + Groq LLM + scikit-learn. 34/34 tests. Real-time AI replies.\n\n2️⃣ **Sales Analytics Pipeline** — $10M data analyzed. Power BI dashboards. 12.37% margin insight.\n\n3️⃣ **House Price Predictor** — Random Forest. RMSE 0.5449, R² 0.7734. Fully reproducible.` },
+          { keys: ['project', 'build', 'deploy', 'make', 'create', 'app', 'platform', 'pipeline', 'servicenow'], a: `4 production-deployed projects:\n\n1️⃣ **Enterprise AI ServiceNow Platform** — Intelligent ticket classification, ServiceNow PDI REST API live sync, Human-in-the-Loop governance console & audit trail.\n\n2️⃣ **AI Support Platform** — FastAPI + Groq LLM + scikit-learn. 34/34 tests. Real-time AI replies.\n\n3️⃣ **Sales Analytics Pipeline** — $10M data analyzed. Power BI dashboards. 12.37% margin insight.\n\n4️⃣ **House Price Predictor** — Random Forest. RMSE 0.5449, R² 0.7734. Fully reproducible.` },
           { keys: ['education', 'degree', 'college', 'university', 'study', 'gpa', 'cgpa', 'btech'], a: `🎓 B.Tech CSE (AI & ML)\nJNTUK — Ramachandra College of Engineering\nCGPA: 8.1/10 · Completed April 2026\n\n📚 Intermediate (MPC): 88.3% — Narayana Jr. College\n📚 SSC: 597/600 — Narayana School` },
           { keys: ['experience', 'internship', 'work', 'job', 'history'], a: `2 verified internships:\n\n1️⃣ **AI/ML Internship** @ EXCELR (APSCHE) — Jun–Aug 2024\nNumPy pipelines, ML benchmarking, hyperparameter tuning\n\n2️⃣ **Web Dev Internship** @ CSEDGE — May–Jun 2024\nNode.js REST APIs, Agile collaboration` },
           { keys: ['contact', 'reach', 'email', 'phone', 'hire', 'available', 'opportunity'], a: `Kamal is actively available for opportunities! 🟢\n\n📧 kamalpraneethbatchu@gmail.com\n📱 +91 6301179267\n🔗 linkedin.com/in/kamal-praneeth-batchu-352b68258\n💻 github.com/kamalpraneeth\n📍 Eluru, Andhra Pradesh, India` },
-          { keys: ['github', 'repo', 'code', 'source', 'open'], a: `All 3 projects are on GitHub with full source, tests & CI/CD:\n\n• github.com/kamalpraneeth/ai-support-platform\n• github.com/kamalpraneeth/sales-analytics-pipeline\n• github.com/kamalpraneeth/california-house-price-predictor` },
+          { keys: ['github', 'repo', 'code', 'source', 'open'], a: `All 4 projects are on GitHub with full source & live demos:\n\n• github.com/kamalpraneeth/enterprise-ai-servicenow-platform\n• github.com/kamalpraneeth/ai-support-platform\n• github.com/kamalpraneeth/sales-analytics-pipeline\n• github.com/kamalpraneeth/california-house-price-predictor` },
           { keys: ['ai', 'machine learning', 'ml', 'deep', 'nlp', 'llm', 'gen', 'generative'], a: `AI/ML specialization:\n\n• Classical ML: Random Forest, LR, TF-IDF\n• NLP: VADER sentiment, text classification\n• Gen AI: Groq API (llama-3.1-8b-instant), RAG\n• Deployment: FastAPI + Docker + GitHub Actions\n\nThe AI Support Platform uses a hybrid ML+LLM architecture — genuinely novel for a student project.` },
-          { keys: ['cert', 'certification', 'servicenow', 'nptel'], a: `3 certifications:\n\n✅ ServiceNow CSA — Certified System Administrator\n✅ ServiceNow CAD — Certified Application Developer\n✅ NPTEL — Intro to Machine Learning\n\nPlus internship certificates from EXCELR and CSEDGE.` },
-          { keys: ['why', 'hire', 'reason', 'stand out', 'unique', 'different'], a: `Why hire Kamal?\n\n✅ 3 live, verifiable deployments (not just GitHub repos)\n✅ 42+ tests passing — he writes tests\n✅ Multi-model AI architecture (ML + LLM hybrid)\n✅ ServiceNow certified on top of AI/ML skills\n✅ 0 fabricated claims — every metric is real\n✅ Available immediately — B.Tech completed April 2026` },
+          { keys: ['cert', 'certification', 'servicenow', 'nptel'], a: `3 certifications:\n\n✅ ServiceNow CSA — Certified System Administrator\n✅ ServiceNow CAD — Certified Application Developer\n✅ NPTEL — Intro to Machine Learning\n\nPlus hands-on ServiceNow Enterprise AI Platform deployment!` },
+          { keys: ['why', 'hire', 'reason', 'stand out', 'unique', 'different'], a: `Why hire Kamal?\n\n✅ 4 live, verifiable deployments (not just GitHub repos)\n✅ ServiceNow CSA & CAD Certified with hands-on Enterprise AIOps platform implementation\n✅ 42+ tests passing — he writes tests\n✅ Multi-model AI architecture (ML + LLM hybrid)\n✅ 0 fabricated claims — every metric is real\n✅ Available immediately — B.Tech completed April 2026` },
         ];
 
         const SUGGESTIONS = ['Who is Kamal?', 'Skills', 'Projects', 'Contact info', 'Why hire him?'];
@@ -3214,7 +3256,7 @@
         const GH = 'kamalpraneeth';
 
         function setStaticStats() {
-          document.getElementById('gh-repos').textContent = "5";
+          document.getElementById('gh-repos').textContent = "6";
           document.getElementById('gh-followers').textContent = "0";
           document.getElementById('gh-stars').textContent = "0";
           document.getElementById('gh-live').classList.remove('loading');
