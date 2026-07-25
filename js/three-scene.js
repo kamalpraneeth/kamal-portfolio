@@ -1,16 +1,17 @@
-import * as THREE from 'three';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+/* THREE.JS SCENE — uses THREE global from CDN */
+(function() {
+  'use strict';
+  if (!window.THREE) return;
+  if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
 
-gsap.registerPlugin(ScrollTrigger);
-
-(function initThreeScene() {
   const canvas = document.getElementById('hcanvas');
-  if (!canvas || window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  if (!canvas) return;
+
+  const isMob = window.innerWidth < 768;
 
   /* ─── RENDERER ─── */
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
   renderer.setClearColor(0x000000, 0);
 
@@ -19,22 +20,21 @@ gsap.registerPlugin(ScrollTrigger);
   const camera = new THREE.PerspectiveCamera(70, canvas.offsetWidth / canvas.offsetHeight, 0.1, 100);
   camera.position.set(0, 0.5, 3.5);
 
-  /* ─── GALAXY GEOMETRY ─── */
-  const isMob = innerWidth < 768;
-  const COUNT = isMob ? 5000 : 15000;
-  const pos   = new Float32Array(COUNT * 3);
-  const col   = new Float32Array(COUNT * 3);
-  const sc    = new Float32Array(COUNT);
+  /* ─── GALAXY ─── */
+  const COUNT = isMob ? 5000 : 14000;
+  const pos  = new Float32Array(COUNT * 3);
+  const col  = new Float32Array(COUNT * 3);
+  const sc   = new Float32Array(COUNT);
 
   const cInner = new THREE.Color('#7c3aed');
   const cOuter = new THREE.Color('#22d3ee');
-  const cAccent= new THREE.Color('#ec4899');
+  const cAccent = new THREE.Color('#ec4899');
 
   for (let i = 0; i < COUNT; i++) {
     const i3 = i * 3;
     const radius     = Math.random() * 4.5 + 0.2;
     const spinAngle  = radius * 1.8;
-    const branchAngle= ((i % 3) / 3) * Math.PI * 2;
+    const branchAngle = ((i % 3) / 3) * Math.PI * 2;
     const scatter    = Math.pow(Math.random(), 2.5);
     const sign       = () => (Math.random() < 0.5 ? 1 : -1);
 
@@ -51,7 +51,7 @@ gsap.registerPlugin(ScrollTrigger);
   const geo = new THREE.BufferGeometry();
   geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
   geo.setAttribute('color',    new THREE.BufferAttribute(col, 3));
-  geo.setAttribute('aScale',   new THREE.BufferAttribute(sc,  1));
+  geo.setAttribute('aScale',   new THREE.BufferAttribute(sc, 1));
 
   /* ─── SHADER MATERIAL ─── */
   const mat = new THREE.ShaderMaterial({
@@ -61,7 +61,7 @@ gsap.registerPlugin(ScrollTrigger);
     transparent: true,
     uniforms: {
       uTime: { value: 0 },
-      uSize: { value: 30.0 * renderer.getPixelRatio() },
+      uSize: { value: 30.0 * renderer.getPixelRatio() }
     },
     vertexShader: `
       uniform float uTime;
@@ -70,7 +70,7 @@ gsap.registerPlugin(ScrollTrigger);
       varying vec3 vColor;
       void main(){
         vColor = color;
-        vec4 mp = modelMatrix * vec4(position,1.0);
+        vec4 mp = modelMatrix * vec4(position, 1.0);
         mp.y += sin(uTime * 0.5 + mp.x * 1.8) * 0.05;
         mp.x += cos(uTime * 0.35 + mp.z * 1.5) * 0.04;
         vec4 vp = viewMatrix * mp;
@@ -95,55 +95,67 @@ gsap.registerPlugin(ScrollTrigger);
 
   /* ─── MOUSE ─── */
   let mx = 0, my = 0, tmx = 0, tmy = 0;
-  window.addEventListener('mousemove', e => {
-    tmx = (e.clientX / innerWidth - 0.5) * 2;
-    tmy = -(e.clientY / innerHeight - 0.5) * 2;
+  window.addEventListener('mousemove', function(e) {
+    tmx = (e.clientX / window.innerWidth - 0.5) * 2;
+    tmy = -(e.clientY / window.innerHeight - 0.5) * 2;
   }, { passive: true });
 
-  /* ─── SCROLL ─── */
-  ScrollTrigger.create({
-    trigger: '#hero',
-    start: 'top top',
-    end: 'bottom top',
-    onUpdate: self => {
-      const p = self.progress;
-      gsap.set(galaxy.position, { y: -p * 1.8 });
-      gsap.set(galaxy.rotation, { x: p * 0.6 });
-      mat.uniforms.uSize.value = 30 * renderer.getPixelRatio() * (1 - p * 0.5);
-    }
-  });
+  /* ─── SCROLL PARALLAX (vanilla, no GSAP dep here) ─── */
+  window.addEventListener('scroll', function() {
+    const hero = document.getElementById('hero');
+    if (!hero) return;
+    const heroH = hero.offsetHeight;
+    const p = Math.min(window.scrollY / heroH, 1);
+    galaxy.position.y = -p * 1.8;
+    galaxy.rotation.x = p * 0.6;
+    mat.uniforms.uSize.value = 30 * renderer.getPixelRatio() * (1 - p * 0.5);
+  }, { passive: true });
 
   /* ─── RESIZE ─── */
-  const ro = new ResizeObserver(() => {
+  window.addEventListener('resize', function() {
     camera.aspect = canvas.offsetWidth / canvas.offsetHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     mat.uniforms.uSize.value = 30 * renderer.getPixelRatio();
-  });
-  ro.observe(canvas);
+  }, { passive: true });
 
-  /* ─── ENTRY ─── */
-  gsap.from(galaxy.scale, { x: 0.2, y: 0.2, z: 0.2, duration: 3.5, ease: 'power3.out', delay: 1.0 });
-  gsap.from(galaxy.rotation, { y: -Math.PI * 0.8, duration: 4, ease: 'power3.out', delay: 1.0 });
-
-  /* ─── VISIBILITY PAUSE ─── */
-  let visible = true;
-  new IntersectionObserver(e => visible = e[0].isIntersecting, { threshold: 0 }).observe(canvas);
+  /* ─── ENTRY ANIM ─── */
+  var entryStart = Date.now();
+  var entryDur = 3500;
 
   /* ─── LOOP ─── */
-  const clock = new THREE.Clock();
+  var clock = { start: Date.now() };
+  var visible = true;
+  var io = new IntersectionObserver(function(e) { visible = e[0].isIntersecting; }, { threshold: 0 });
+  io.observe(canvas);
+
   (function animate() {
     requestAnimationFrame(animate);
     if (!visible) return;
-    const t = clock.getElapsedTime();
-    mat.uniforms.uTime.value = t;
+
+    var elapsed = (Date.now() - clock.start) / 1000;
+    mat.uniforms.uTime.value = elapsed;
+
+    // Entry scale-in
+    var ep = Math.min((Date.now() - entryStart) / entryDur, 1);
+    var eased = 1 - Math.pow(1 - ep, 3);
+    if (ep < 1) {
+      var s = 0.2 + eased * 0.8;
+      galaxy.scale.set(s, s, s);
+      galaxy.rotation.y = -(1 - eased) * Math.PI * 0.8;
+    }
+
+    // Mouse smoothing
     mx += (tmx - mx) * 0.03;
     my += (tmy - my) * 0.03;
-    galaxy.rotation.y = t * 0.045 + mx * 0.35;
+
+    if (ep >= 1) galaxy.rotation.y = elapsed * 0.045 + mx * 0.35;
     camera.position.x += (mx * 0.25 - camera.position.x) * 0.025;
     camera.position.y += (my * 0.15 + 0.5 - camera.position.y) * 0.025;
     camera.lookAt(scene.position);
     renderer.render(scene, camera);
   })();
+
+  window.__threeReady = true;
 })();
