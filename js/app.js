@@ -137,23 +137,17 @@ function initGSAPHero() {
 
 /* ── GSAP SCROLL ANIMATIONS ── */
 function initGSAPScrollAnimations() {
-  if (RM || !window.gsap || !window.ScrollTrigger) return;
+  if (RM) return;
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
 
-  const animFade = (el, extra = {}) => gsap.from(el, {
-    y: 40, opacity: 0, duration: 0.8, ease: 'power3.out',
-    scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
-    ...extra
-  });
-
-  document.querySelectorAll('.rv').forEach(el => { el.style.opacity = ''; el.style.transform = ''; animFade(el); });
-  document.querySelectorAll('.rl').forEach(el => { el.style.opacity = ''; el.style.transform = ''; gsap.from(el, { x: -40, opacity: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } }); });
-  document.querySelectorAll('.rr').forEach(el => { el.style.opacity = ''; el.style.transform = ''; gsap.from(el, { x: 40, opacity: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } }); });
-
-  const pcards = gsap.utils.toArray('.pcard');
-  if (pcards.length) gsap.from(pcards, { y: 60, opacity: 0, rotateX: 8, stagger: { amount: 0.6 }, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '.bento', start: 'top 85%' } });
-
-  const skcats = gsap.utils.toArray('.skcat');
-  if (skcats.length) gsap.from(skcats, { y: 40, opacity: 0, stagger: 0.12, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: '.skgrid', start: 'top 85%' } });
+  document.querySelectorAll('.rv, .rl, .rr, .pcard, .skcat').forEach(el => observer.observe(el));
 }
 
 /* ── COUNTERS ── */
@@ -174,22 +168,10 @@ function initCounters() {
 
 /* ── SKILL BARS ── */
 function initSkillBars() {
-  if (window.ScrollTrigger) {
-    document.querySelectorAll('.skcat').forEach(cat => {
-      ScrollTrigger.create({
-        trigger: cat, start: 'top 85%', once: true,
-        onEnter: () => cat.querySelectorAll('.sbf').forEach((b, i) => {
-          gsap.to(b, { width: b.dataset.p + '%', duration: 1.3, ease: 'power3.out', delay: 0.1 + i * 0.08 });
-        })
-      });
-    });
-  } else {
-    // Fallback: IntersectionObserver
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('.sbf').forEach(b => setTimeout(() => b.style.width = b.dataset.p + '%', 120)); obs.unobserve(e.target); } });
-    }, { threshold: 0.18 });
-    document.querySelectorAll('.skcat').forEach(c => obs.observe(c));
-  }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('.sbf').forEach(b => setTimeout(() => b.style.width = b.dataset.p + '%', 120)); obs.unobserve(e.target); } });
+  }, { threshold: 0.18 });
+  document.querySelectorAll('.skcat').forEach(c => obs.observe(c));
 }
 
 /* ── 3D TILT ── */
