@@ -12,23 +12,7 @@ if (window.gsap && window.ScrollToPlugin) {
   gsap.registerPlugin(ScrollToPlugin);
 }
 
-/* ── LENIS ── */
-let lenis;
-function initLenis() {
-  if (typeof Lenis === 'undefined' || RM || MOB) return;
-  // Lowered duration from 1.2 to 0.7 for much faster/snappier scrolling
-  lenis = new Lenis({ duration: 0.7, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-  
-  function raf(time) { 
-    lenis.raf(time); 
-    requestAnimationFrame(raf); 
-  }
-  requestAnimationFrame(raf);
 
-  if (window.ScrollTrigger) {
-    lenis.on('scroll', ScrollTrigger.update);
-  }
-}
 
 /* ── BOOT ── */
 (function () {
@@ -59,13 +43,13 @@ function initLenis() {
 
 /* ── INIT ALL ── */
 function initAll() {
-  initLenis();
   initNav();
   initScrollProgress();
   initScrollTop();
   if (!MOB) initMagneticCursor();
   initGSAPHero();
   initGSAPScrollAnimations();
+  if (window.ScrollTrigger) setTimeout(() => ScrollTrigger.refresh(), 100);
   initCounters();
   initSkillBars();
   if (!RM && !MOB) initTilt();
