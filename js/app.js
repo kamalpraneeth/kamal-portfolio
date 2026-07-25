@@ -4,6 +4,20 @@
 const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const MOB = /Mobi|Android/i.test(navigator.userAgent) || innerWidth < 960;
 
+let lenis;
+if (typeof Lenis !== 'undefined' && !RM) {
+  lenis = new Lenis({
+    lerp: 0.2,
+    wheelMultiplier: 1.5,
+    smoothWheel: true,
+  });
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+}
+
 /* ── GSAP REGISTER ── */
 if (window.gsap && window.ScrollTrigger) {
   gsap.registerPlugin(ScrollTrigger);
@@ -138,13 +152,13 @@ function initGSAPHero() {
 /* ── GSAP SCROLL ANIMATIONS ── */
 function initGSAPScrollAnimations() {
   if (RM) {
-    document.querySelectorAll('.rv, .rl, .rr, .pcard, .skcat').forEach(el => el.classList.add('is-visible'));
+    document.querySelectorAll('.rv, .rl, .rr, .pcard, .skcat').forEach(el => el.classList.add('v'));
     return;
   }
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
+        entry.target.classList.add('v');
         obs.unobserve(entry.target);
       }
     });
